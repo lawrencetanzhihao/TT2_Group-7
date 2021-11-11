@@ -1,11 +1,11 @@
-from flask import Flask, redirect, url_for
+from flask import Flask, redirect, url_for, flash
 
 app = Flask(__name__)
 
 dict = {}
 dict2 = {}
 
-fake_loginData = {'userName':'dbslogin',
+userData = {'userName':'dbslogin',
                 'password' : 'dbspassword'}
 
 fake_db = {1: 'Production',
@@ -30,7 +30,16 @@ def home():
 #If fail = Stay at login page
 @app.route("/login/")  
 def login(user, password):
-    return "This is for login page"
+    if user not in userData['username']:
+        flash("User not found!")
+        return redirect(url_for("login"))
+
+    else:
+        if password != userData['password']:
+            flash("Password incorrect!")
+            return redirect(url_for("login"))
+
+    return redirect(url_for("profile"))
 
 #Display all existing expenses
 @app.route("/view/")  
