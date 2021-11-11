@@ -1,25 +1,28 @@
 import logo from './logo.svg';
 import './App.css';
+import {useEffect} from 'react'
+import Header from './components/Header'
+import Tasks from './components/Tasks'
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div classsName='container'>
+      <Header />
+      <Tasks />
     </div>
-  );
+  )
 }
+
+useEffect(() => {
+    const fetchTasks = async () =>{
+      const res = await fetch('https://github.com/mmtxs/TT2/tree/main/data')
+      const data = await res.Json()
+
+      return data
+  }
+
+  fetchTasks()
+}, [])
+
 
 export default App;
