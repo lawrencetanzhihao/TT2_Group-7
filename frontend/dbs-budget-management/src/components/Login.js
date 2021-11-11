@@ -1,9 +1,11 @@
 import { useState } from 'react'
+import { useHistory } from "react-router-dom";
 import './Login.css';
 
 const Login = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const history = useHistory();
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -23,12 +25,14 @@ const Login = () => {
 
         setUsername('')
         setPassword('')
+
+        history.push(`/dashboard`);
     }
 
     return (
         <form className='login-form' onSubmit={onSubmit}>
-            <h4>We are <span>GROUP 7</span></h4>
-            <p>Welcome back! Log in to your account to manage project budget:</p>
+            <h2>Welcome!</h2>
+            <p>Log in to your account to manage your project budget!</p>
             <div className='form-control'>
                 <input type="text" placeholder='Username'
                     value={username}

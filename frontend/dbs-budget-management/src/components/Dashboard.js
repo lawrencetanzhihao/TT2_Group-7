@@ -19,34 +19,6 @@ const Dashboard = () => {
             "description": "Smart Watch Tracker"
         },
         {
-            "id": 2,
-            "user_id": 1,
-            "name": "SWT",
-            "budget": 80000,
-            "description": "Smart Watch Tracker"
-        },
-        {
-            "id": 2,
-            "user_id": 1,
-            "name": "SWT",
-            "budget": 80000,
-            "description": "Smart Watch Tracker"
-        },
-        {
-            "id": 2,
-            "user_id": 1,
-            "name": "SWT",
-            "budget": 80000,
-            "description": "Smart Watch Tracker"
-        },
-        {
-            "id": 2,
-            "user_id": 1,
-            "name": "SWT",
-            "budget": 80000,
-            "description": "Smart Watch Tracker"
-        },
-        {
             "id": 3,
             "user_id": 2,
             "name": "ULS",
