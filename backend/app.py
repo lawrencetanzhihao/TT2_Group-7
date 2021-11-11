@@ -28,31 +28,33 @@ def home():
 # if no expeneses added, "display no expenses" 
 #If fail = Stay at login page
 @app.route("/login/")  
-def login(user, password):
+def login():
     # Check username input and comapare with database
-    
-    if user not in userData['username']:
-        flash("User not found!")
-        return redirect(url_for("login"))
+    # receivedName = request.json['enteredName']
+    # if receivedName not in userData['username']:
+        # flash("User not found!")
+        # return redirect(url_for("login"))
+        return "this is login page"
 
     #  Check passord input and comapre with database
-    else:
-        if password != userData['password']:
-            flash("Password incorrect!")
-            return redirect(url_for("login"))
+    # else:
+    #     # receivedPassword = request.json['Password']
+    #     # if receivedPassword != userData['password']:
+    #         flash("Password incorrect!")
+    #         return redirect(url_for("login"))
 
-    return redirect(url_for("profile"))
+    # return redirect(url_for("profile"))
 
 #Display all existing expenses
 #in Profile, user can add/edit/delete expenses as well
-@app.route("/profile")  
+@app.route("/profile", methods=['GET'])  
 def profile():
     # Database will map "userName" to the input userName
     # All expenses added by this user will be displayed here
     return "This is for viewing"
 
 #User want to insert a new expense
-@app.route('/add')
+@app.route("/add", methods=['POST', "GET"])
 def add():
     # 2 input from user
     # 1) Description
