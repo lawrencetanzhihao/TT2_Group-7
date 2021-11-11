@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import './Dashboard.css';
 
 const Dashboard = () => {
-    const [userId, setUserId] = useState(0)
+    const [userId, setUserId] = useState(null)
     const history = useHistory();
     const [projects] = useState([
         {
