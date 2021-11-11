@@ -1,8 +1,9 @@
-import { useState } from 'react'
-import { useHistory } from "react-router-dom";
+import { useState, useEffect } from 'react'
+import { useHistory, useLocation } from "react-router-dom";
 import './Dashboard.css';
 
 const Dashboard = () => {
+    const location = useLocation();
     const [userId, setUserId] = useState(null)
     const history = useHistory();
     const [projects] = useState([
@@ -29,6 +30,12 @@ const Dashboard = () => {
         }
     ])
 
+    useEffect(() => {
+        console.log(location.pathname);
+        console.log(location.state.userId);
+        setUserId(location.state.userId)
+    }, [location]);
+
     const onClick = (e) => {
         e.preventDefault()
 
@@ -45,24 +52,25 @@ const Dashboard = () => {
         <div className='dashboard'>
             <div className='header'>
                 <h2>My Project Dashboard</h2>
-                <input type="number" placeholder='Enter user ID'
-                    value={userId}
-                    onChange={(e) => setUserId(e.target.value)} />
+                {/* <label>Current UserID:
+                    <input type="number" placeholder='Enter user ID'
+                        value={userId}
+                        onChange={(e) => setUserId(e.target.value)} /></label> */}
                 <button className='btn' onClick={logout}>Logout</button>
             </div>
             <div className='row'>
                 {projects.filter((project) => (project.user_id === parseInt(userId))).length > 0 ?
-                (projects.filter((project) => (project.user_id === parseInt(userId))).map((project) => (
-                    <div className='column' onClick={onClick}>
-                        <div key={project.id} className="card">
-                            <div className="container">
-                                <h4><b>{project.name}</b></h4>
-                                <p><b>Project Description: </b>{project.description}</p>
-                                <p><b>Project Budget: </b>${project.budget}</p>
+                    (projects.filter((project) => (project.user_id === parseInt(userId))).map((project) => (
+                        <div className='column' onClick={onClick}>
+                            <div key={project.id} className="card">
+                                <div className="container">
+                                    <h4><b>{project.name}</b></h4>
+                                    <p><b>Project Description: </b>{project.description}</p>
+                                    <p><b>Project Budget: </b>${project.budget}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))):('You have no project.')}
+                    ))) : ('You have no project.')}
             </div>
 
         </div>
