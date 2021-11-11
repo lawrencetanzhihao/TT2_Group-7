@@ -3,7 +3,7 @@
 import React from 'react'
 import { MdAddCircle, MdCheckCircle } from 'react-icons/md';
 
-const ExpenseForm = ({ description, amount, update }) => {
+const ExpenseForm = ({ description, amount, handleDescription, handleAmount, update }) => {
    return (
       <form>
          <div className="form-center">
@@ -14,6 +14,8 @@ const ExpenseForm = ({ description, amount, update }) => {
                   className="form-control"
                   id="description"
                   name="description"
+                  value={description}
+                  onChange={handleDescription}
                />
             </div>
 
@@ -24,6 +26,8 @@ const ExpenseForm = ({ description, amount, update }) => {
                   className="form-control"
                   id="amount"
                   name="amount"
+                  value={amount}
+                  onChange={handleAmount}
                />
             </div>
          </div>

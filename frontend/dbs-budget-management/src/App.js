@@ -12,6 +12,26 @@ function App() {
   //******** Initial States ********//
   const [expenses, setExpenses] = useState([]);
 
+  const [description, setDescription] = useState('');
+
+  const [amount, setAmount] = useState('');
+
+
+
+
+  //******** Functionality *******/
+  //handle description
+  const handleDescription = (e) => {
+    console.log(`description: ${e.target.value}`);
+    setDescription(e.target.value);
+  };
+
+  //handle amount
+  const handleAmount = (e) => {
+    console.log(`amount: ${e.target.value}`);
+    setAmount(e.target.value);
+  }
+  
 
   return (
     <>
@@ -25,7 +45,14 @@ function App() {
         </div>
 
 
-        <ExpenseForm />
+        <ExpenseForm
+          description={description}
+          amount={amount}
+          handleDescription={handleDescription}
+          handleAmount={handleAmount}
+          // update={update}
+        />
+
         <ExpenseList
           expenses={expenses}
         />
