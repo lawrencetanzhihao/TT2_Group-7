@@ -3,9 +3,9 @@
 import React from 'react'
 import { MdAddCircle, MdCheckCircle } from 'react-icons/md';
 
-const ExpenseForm = ({ description, amount, handleDescription, handleAmount, update }) => {
+const ExpenseForm = ({ description, amount, handleDescription, handleAmount, handleSubmit, update }) => {
    return (
-      <form>
+      <form onSubmit={handleSubmit}>
          <div className="form-center">
             <div className="form-group">
                <label htmlFor="description">description</label>

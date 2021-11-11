@@ -3,6 +3,7 @@ import './App.css';
 import Alert from './components/Alert';
 import ExpenseForm from './components/ExpenseForm';
 import ExpenseList from './components/ExpenseList';
+import { v4 as uuidv4 } from 'uuid';
 
 import { MdAttachMoney } from 'react-icons/md';
 
@@ -31,6 +32,19 @@ function App() {
     console.log(`amount: ${e.target.value}`);
     setAmount(e.target.value);
   }
+
+  //handle submit
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (description !== '' && amount > 0) {
+      const singleExpense = { id: uuidv4(), description, amount };
+      setExpenses([...expenses, singleExpense]);
+
+      setDescription('');
+      setAmount('');
+    }
+  }
   
 
   return (
@@ -50,6 +64,7 @@ function App() {
           amount={amount}
           handleDescription={handleDescription}
           handleAmount={handleAmount}
+          handleSubmit={handleSubmit}
           // update={update}
         />
 
