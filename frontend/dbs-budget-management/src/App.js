@@ -1,12 +1,13 @@
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import Login from './components/Login'
+import Dashboard from './components/Dashboard'
 import Alert from './components/Alert';
 import ExpenseForm from './components/ExpenseForm';
 import ExpenseList from './components/ExpenseList';
 import { v4 as uuidv4 } from 'uuid';
-
 import { MdAttachMoney } from 'react-icons/md';
-
 
 const initialExpenses = localStorage.getItem('expenses')
   ? JSON.parse(localStorage.getItem('expenses'))
@@ -56,7 +57,7 @@ function App() {
       setAlert({ show: false })
     }, [3000]);
   };
-  
+
 
   //handle submit
   const handleSubmit = (e) => {
@@ -64,7 +65,7 @@ function App() {
 
     if (description !== '' && amount > 0) {
 
-      if(update) {
+      if (update) {
         let updateExpenses = expenses.map(item => {
           return item.id === updateId ? { ...item, description, amount } : item
         });
@@ -98,7 +99,7 @@ function App() {
   };
 
   //update single expense
-  const handleUpdate =(id) => {
+  const handleUpdate = (id) => {
     console.log(`Expenses updated: ${id}`);
 
     let updateExpenses = expenses.find(item => item.id === id);
@@ -126,7 +127,7 @@ function App() {
       text: 'Expense Deleted!'
     })
   }
-  
+
   //clear all expenses
   const clearItems = () => {
     console.log('Clear all expenses');
@@ -139,37 +140,50 @@ function App() {
   }
 
   return (
-    <>
-      <main className="App">
+    <Router>
+      <div>
+        <Switch>
+          <Route exact path="/">
+            <Login />
+          </Route>
+          <Route path="/dashboard">
+            <Dashboard userId={1} />
+          </Route>
+          <Route path="/budget">
+            <main className="App">
 
-        <div className="header-container">
-          <div className="header-title">
-            <MdAttachMoney />
-            Budget Management Application
-          </div>
-        </div>
+              <div className="header-container">
+                <div className="header-title">
+                  <MdAttachMoney />
+                  Budget Management Application
+                </div>
+              </div>
 
+              <ExpenseForm
+                description={description}
+                amount={amount}
+                handleDescription={handleDescription}
+                handleAmount={handleAmount}
+                handleSubmit={handleSubmit}
+                update={update}
+              />
 
-        <ExpenseForm
-          description={description}
-          amount={amount}
-          handleDescription={handleDescription}
-          handleAmount={handleAmount}
-          handleSubmit={handleSubmit}
-          update={update}
-        />
+              <ExpenseList
+                expenses={expenses}
+                handleDelete={handleDelete}
+                clearItems={clearItems}
+                handleUpdate={handleUpdate}
+              />
+            </main>
 
-        <ExpenseList
-          expenses={expenses}
-          handleDelete={handleDelete}
-          clearItems={clearItems}
-          handleUpdate={handleUpdate}
-        />
-      </main>
+            {alert.show && <Alert type={alert.type} text={alert.text} />}
+            <Alert />
+          </Route>
 
-      {alert.show && <Alert type={alert.type} text={alert.text} />}
-        <Alert />
-    </>
+        </Switch>
+      </div>
+    </Router>
+
   );
 }
 
