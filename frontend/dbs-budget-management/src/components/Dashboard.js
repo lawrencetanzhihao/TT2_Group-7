@@ -47,7 +47,8 @@ const Dashboard = ({ userId }) => {
                 <button className='btn' onClick={logout}>Logout</button>
             </div>
             <div className='row'>
-                {projects.filter((project) => (project.user_id === userId)).map((project) => (
+                {projects.filter((project) => (project.user_id === userId)).length > 0 ?
+                (projects.filter((project) => (project.user_id === userId)).map((project) => (
                     <div className='column' onClick={onClick}>
                         <div key={project.id} className="card">
                             <div className="container">
@@ -57,7 +58,7 @@ const Dashboard = ({ userId }) => {
                             </div>
                         </div>
                     </div>
-                ))}
+                ))):('You have no project.')}
             </div>
 
         </div>
