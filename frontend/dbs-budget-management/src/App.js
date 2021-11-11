@@ -26,7 +26,9 @@ function App() {
 
 
         <ExpenseForm />
-        <ExpenseList />
+        <ExpenseList
+          expenses={expenses}
+        />
         <Alert />
       </main>
     </>
