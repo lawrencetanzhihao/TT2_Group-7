@@ -17,6 +17,8 @@ function App() {
 
   const [amount, setAmount] = useState('');
 
+  const [alert, setAlert] = useState({ show: false });
+
 
 
 
@@ -33,6 +35,12 @@ function App() {
     setAmount(e.target.value);
   }
 
+  //handle alert 
+  const handleAlert = ({ type, text }) => {
+    setAlert({ show: true, type, text });
+  }
+  
+
   //handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,6 +51,11 @@ function App() {
 
       setDescription('');
       setAmount('');
+
+      handleAlert({
+        type: 'danger',
+        text: `Input a description and an amount greater than 0!`
+      });
     }
   }
   
@@ -71,8 +84,10 @@ function App() {
         <ExpenseList
           expenses={expenses}
         />
-        <Alert />
       </main>
+
+      {alert.show && <Alert type={alert.type} text={alert.text} />}
+        <Alert />
     </>
   );
 }
