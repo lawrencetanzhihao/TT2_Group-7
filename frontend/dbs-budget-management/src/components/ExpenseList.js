@@ -4,7 +4,7 @@ import React from 'react'
 import ExpenseItem from './ExpenseItem';
 import { MdDelete } from 'react-icons/md';
 
-const ExpenseList = ({ expenses }) => {
+const ExpenseList = ({ expenses, clearItems, handleDelete, handleUpdate }) => {
    return (
       <> 
          <ul className="list">
@@ -13,6 +13,8 @@ const ExpenseList = ({ expenses }) => {
                   <ExpenseItem
                      key={expense.id}
                      expense={expense}
+                     handleDelete={handleDelete}
+                     // handleUpdate={handleUpdate}
                   />
                )
             })}

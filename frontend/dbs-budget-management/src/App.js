@@ -58,7 +58,31 @@ function App() {
       });
     }
   }
+
+  //delete single expense
+  const handleDelete = (id) => {
+    console.log(`Expenses deleted: ${id}`);
+
+    let deleteExpenses = expenses.filter((item) => item.id !== id);
+    console.log(deleteExpenses);
+    setExpenses(deleteExpenses);
+
+    handleAlert({
+      type: 'success',
+      text: 'Expense Deleted!'
+    })
+  }
   
+  //clear all expenses
+  const clearItems = () => {
+    console.log('Clear all expenses');
+    setExpenses([]);
+
+    handleAlert({
+      type: 'success',
+      text: 'All Expenses Cleared!'
+    })
+  }
 
   return (
     <>
@@ -83,6 +107,8 @@ function App() {
 
         <ExpenseList
           expenses={expenses}
+          handleDelete={handleDelete}
+          clearItems={clearItems}
         />
       </main>
 
