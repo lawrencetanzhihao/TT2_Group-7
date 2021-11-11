@@ -42,10 +42,24 @@ def login(user, password):
     return redirect(url_for("profile"))
 
 #Display all existing expenses
-@app.route("/view/")  
+@app.route("/profile")  
 def view():
     return "This is for viewing"
 
+#User want to insert a new expense
+@app.route('/add')
+def add():
+    return "User adds a new expense"
+
+#User want to update an existing expense
+@app.route('/update')
+def update():
+    return "User updates an existing expense"
+    
+#User want to remove an existing expense
+@app.route('/delete')
+def delete():
+    return "User removes an existing expense"
 
 if __name__ == "__main__":
     app.run(debug=True)
