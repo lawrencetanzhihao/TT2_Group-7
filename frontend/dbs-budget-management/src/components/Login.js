@@ -68,7 +68,7 @@ const Login = () => {
 
         history.push({
             pathname: '/dashboard',
-            state: { userId: users.filter((user) => (user.username === username))[0].id }
+            state: { userId: users.filter((user) => (user.username === username)).length > 0 ? users.filter((user) => (user.username === username))[0].id : -1}
         });
     }
 
