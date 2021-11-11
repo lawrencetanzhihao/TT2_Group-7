@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { useHistory } from "react-router-dom";
 import './Dashboard.css';
 
-const Dashboard = ({ userId }) => {
+const Dashboard = () => {
+    const [userId, setUserId] = useState(0)
     const history = useHistory();
     const [projects] = useState([
         {
@@ -44,11 +45,14 @@ const Dashboard = ({ userId }) => {
         <div className='dashboard'>
             <div className='header'>
                 <h2>My Project Dashboard</h2>
+                <input type="number" placeholder='Enter user ID'
+                    value={userId}
+                    onChange={(e) => setUserId(e.target.value)} />
                 <button className='btn' onClick={logout}>Logout</button>
             </div>
             <div className='row'>
-                {projects.filter((project) => (project.user_id === userId)).length > 0 ?
-                (projects.filter((project) => (project.user_id === userId)).map((project) => (
+                {projects.filter((project) => (project.user_id === parseInt(userId))).length > 0 ?
+                (projects.filter((project) => (project.user_id === parseInt(userId))).map((project) => (
                     <div className='column' onClick={onClick}>
                         <div key={project.id} className="card">
                             <div className="container">

@@ -26,10 +26,7 @@ const Login = () => {
         setUsername('')
         setPassword('')
 
-        history.push(`/dashboard`,
-            {
-                userId: username,
-            });
+        history.push(`/dashboard`);
     }
 
     return (
