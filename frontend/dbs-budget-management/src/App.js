@@ -7,11 +7,17 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { MdAttachMoney } from 'react-icons/md';
 
+
+const initialExpenses = localStorage.getItem('expenses')
+  ? JSON.parse(localStorage.getItem('expenses'))
+  : [];
+
+
 function App() {
 
 
   //******** Initial States ********//
-  const [expenses, setExpenses] = useState([]);
+  const [expenses, setExpenses] = useState(initialExpenses);
 
   const [description, setDescription] = useState('');
 
@@ -24,7 +30,10 @@ function App() {
   const [updateId, setUpdateId] = useState(0);
 
 
-
+  useEffect(() => {
+    console.log('useEffect called');
+    localStorage.setItem('expenses', JSON.stringify(expenses))
+  }, [expenses]);
 
   //******** Functionality *******/
   //handle description
@@ -50,24 +59,43 @@ function App() {
     e.preventDefault();
 
     if (description !== '' && amount > 0) {
-      const singleExpense = { id: uuidv4(), description, amount };
-      setExpenses([...expenses, singleExpense]);
+
+      if(update) {
+        let updateExpenses = expenses.map(item => {
+          return item.id === updateId ? { ...item, description, amount } : item
+        });
+
+        setExpenses(updateExpenses);
+        setUpdate(false);
+
+        handleAlert({
+          type: 'success',
+          text: 'Expense Updated!'
+        })
+
+      } else {
+        const singleExpense = { id: uuidv4(), description, amount };
+        setExpenses([...expenses, singleExpense]);
+      }
 
       setDescription('');
       setAmount('');
-
+    } else {
       handleAlert({
         type: 'danger',
         text: `Input a description and an amount greater than 0!`
       });
     }
-  }
+  };
 
   //update single expense
   const handleUpdate =(id) => {
     console.log(`Expenses updated: ${id}`);
 
     let updateExpenses = expenses.find(item => item.id === id);
+    console.log(updateExpenses);
+
+    let { description, amount } = updateExpenses;
     setDescription(description);
     setAmount(amount);
 
