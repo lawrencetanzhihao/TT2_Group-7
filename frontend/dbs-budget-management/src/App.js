@@ -51,7 +51,11 @@ function App() {
   //handle alert 
   const handleAlert = ({ type, text }) => {
     setAlert({ show: true, type, text });
-  }
+
+    setTimeout(() => {
+      setAlert({ show: false })
+    }, [3000]);
+  };
   
 
   //handle submit
@@ -76,6 +80,11 @@ function App() {
       } else {
         const singleExpense = { id: uuidv4(), description, amount };
         setExpenses([...expenses, singleExpense]);
+
+        handleAlert({
+          type: 'success',
+          text: 'Expense Added!'
+        })
       }
 
       setDescription('');
@@ -136,7 +145,7 @@ function App() {
         <div className="header-container">
           <div className="header-title">
             <MdAttachMoney />
-            Project Expense Tracker
+            Budget Management Application
           </div>
         </div>
 
