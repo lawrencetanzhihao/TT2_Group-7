@@ -19,7 +19,7 @@ const ExpenseItem = ({ expense, handleDelete, handleUpdate }) => {
                <button
                   className="edit-btn"
                   aria-label="update button"
-                  // onClick={() => handleUpdate(id)}
+                  onClick={() => handleUpdate(id)}
                >
                   <MdEdit />
                </button>
@@ -32,8 +32,6 @@ const ExpenseItem = ({ expense, handleDelete, handleUpdate }) => {
                   <MdCancel />
                </button>
             </div>
-
-
          </li>
       </>
    )

@@ -19,6 +19,10 @@ function App() {
 
   const [alert, setAlert] = useState({ show: false });
 
+  const [update, setUpdate] = useState(false);
+
+  const [updateId, setUpdateId] = useState(0);
+
 
 
 
@@ -57,6 +61,19 @@ function App() {
         text: `Input a description and an amount greater than 0!`
       });
     }
+  }
+
+  //update single expense
+  const handleUpdate =(id) => {
+    console.log(`Expenses updated: ${id}`);
+
+    let updateExpenses = expenses.find(item => item.id === id);
+    setDescription(description);
+    setAmount(amount);
+
+    setUpdate(true);
+
+    setUpdateId(id);
   }
 
   //delete single expense
@@ -102,13 +119,14 @@ function App() {
           handleDescription={handleDescription}
           handleAmount={handleAmount}
           handleSubmit={handleSubmit}
-          // update={update}
+          update={update}
         />
 
         <ExpenseList
           expenses={expenses}
           handleDelete={handleDelete}
           clearItems={clearItems}
+          handleUpdate={handleUpdate}
         />
       </main>
 

@@ -14,7 +14,7 @@ const ExpenseList = ({ expenses, clearItems, handleDelete, handleUpdate }) => {
                      key={expense.id}
                      expense={expense}
                      handleDelete={handleDelete}
-                     // handleUpdate={handleUpdate}
+                     handleUpdate={handleUpdate}
                   />
                )
             })}
